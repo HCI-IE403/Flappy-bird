@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url(/images/bg1.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
+
+.setting-title {
+  text-align: center;
+  font: 500 2rem "Lucida Grande";
+  margin-top: 3vh;
+  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+}
+.setting-bg, .setting-avatar /*,  .setting-music */ {
+  display: flex;
+  justify-content: center;
+  margin-top: 3vh;
+}
+.setting-bg-image,
+.setting-avatar-image {
+  width: 200px;
+  height: 200px;
+  margin: 0 20px;
+  padding: 30px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.setting-avatar-image {
+  width: 150px;
+  height: 150px;
+}
+
+.selected {
+  padding: 10px;
+  background-color: rgb(207, 255, 207);
+}
+
+.setting-music-div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 35%;
+}
+.setting-music-div > div {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.setting-music-div > div > label {
+  margin-left: 10px;
+}
+.setting-music label {
+  width: 100px;
+}
+
+.setting-submit {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
