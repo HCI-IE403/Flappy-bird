@@ -9,10 +9,8 @@ let sound_die = new Audio("../sound-effects/die.mp3");
 document.querySelector(".background").style.backgroundImage =
   'url("../images/' + window.localStorage.getItem("background-img") + '")';
 
-// getting bird element properties
 let bird_props = bird.getBoundingClientRect();
 
-// This method returns DOMReact -> top, right, bottom, left, x, y, width and height
 let background = document.querySelector(".background").getBoundingClientRect();
 
 let score_val = document.querySelector(".score_val");
@@ -58,8 +56,19 @@ function play() {
           bird_props.top + bird_props.height > pipe_sprite_props.top
         ) {
           game_state = "End";
-          message.innerHTML =
-            "Game Over".fontcolor("red") + "<br>Press Space To Restart";
+
+          let max_score = Math.max(
+            Number(score_val.textContent),
+            Number(window.localStorage.getItem("max-score"))
+          );
+          window.localStorage.setItem("max-score", max_score);
+          console.log(score_val.textContent);
+          console.log(max_score);
+
+          message.innerHTML = ` <p>Game Over</p>
+                                <p>Score : ${score_val.textContent}</p>
+                                <p>My Highest Score : ${max_score}</p>
+                                <p>Press Space to Restart</p>`;
           message.classList.add("messageStyle");
           img.style.display = "none";
           sound_die.play();

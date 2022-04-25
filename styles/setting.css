@@ -20,9 +20,9 @@
   text-align: center;
   font: 500 2rem "Lucida Grande";
   margin-top: 3vh;
-  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
 }
-.setting-bg, .setting-avatar /*,  .setting-music */ {
+.setting-bg,
+.setting-avatar {
   display: flex;
   justify-content: center;
   margin-top: 3vh;
@@ -36,7 +36,6 @@
   border: 1px solid gray;
   border-radius: 10px;
 }
-
 .setting-avatar-image {
   width: 150px;
   height: 150px;
