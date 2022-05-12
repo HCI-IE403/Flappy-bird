@@ -38,7 +38,8 @@
     <div class="setting-music">
       <div class="setting-music-div">
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <input class="form-check-input music-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+            value="mute">
           <label class="form-check-label" for="inlineRadio1">
             No Music
             <img class="music-mute" src="../images/icons8-mute-16.png" alt="mute-icon">
@@ -46,19 +47,21 @@
         </div>
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option2">
-          <label class="form-check-label" for="inlineRadio1">
+          <input class="form-check-input music-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+            value="bg-music-1" checked="checked">
+          <label class="form-check-label" for="inlineRadio2">
             <audio controls>
-              <source src="../sound-effects/point.mp3" type="audio/mpeg">
+              <source src="../sound-effects/bg-music-1.mp3" type="audio/mpeg">
               Your browser does not support the audio tag.
             </audio>
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option3">
-          <label class="form-check-label" for="inlineRadio2">
+          <input class="form-check-input music-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+            value="bg-music-2">
+          <label class="form-check-label" for="inlineRadio3">
             <audio controls>
-              <source src="../sound-effects/point.mp3" type="audio/mpeg">
+              <source src="../sound-effects/bg-music-2.mp3" type="audio/mpeg">
               Your browser does not support the audio tag.
             </audio>
           </label>
@@ -73,8 +76,21 @@
 
   <script>
     // Default values
+    window.localStorage.setItem("background-img", "bg-img1.png");
     window.localStorage.setItem("bird-img-a", "bird-1a.png");
     window.localStorage.setItem("bird-img-b", "bird-1b.png");
+    window.localStorage.setItem("bg-music", "bg-music-1");
+
+    // Background selection
+    let bg_imgs = document.querySelectorAll(".setting-bg-image");
+    for (let i = 0; i < bg_imgs.length; i++) {
+      bg_imgs[i].addEventListener('click', (e) => {
+        for (let i = 0; i < bg_imgs.length; i++)
+          bg_imgs[i].classList.remove('selected');
+        bg_imgs[i].classList.add("selected");
+        window.localStorage.setItem("background-img", bg_imgs[i].alt);
+      })
+    }
 
     // Avatar selection
     let bird_imgs = document.querySelectorAll(".setting-avatar-image");
@@ -88,16 +104,14 @@
       })
     }
 
-    // Background selection
-    let bg_imgs = document.querySelectorAll(".setting-bg-image");
-    for (let i = 0; i < bg_imgs.length; i++) {
-      bg_imgs[i].addEventListener('click', (e) => {
-        for (let i = 0; i < bg_imgs.length; i++)
-          bg_imgs[i].classList.remove('selected');
-        bg_imgs[i].classList.add("selected");
-        window.localStorage.setItem("background-img", bg_imgs[i].alt);
+    // Music selection
+    let bg_musics = document.querySelectorAll(".music-input");
+    for (let i = 0; i < bg_musics.length; i++) {
+      bg_musics[i].addEventListener('click', (e) => {
+        window.localStorage.setItem("bg-music", bg_musics[i].value);
       })
     }
+
   </script>
 </body>
 

@@ -4,8 +4,10 @@ let bird = document.querySelector(".bird");
 let img = document.getElementById("bird-1");
 let bird_src1 = "../images/" + window.localStorage.getItem("bird-img-a");
 let bird_src2 = "../images/" + window.localStorage.getItem("bird-img-b");
+let bg_music_name = window.localStorage.getItem("bg-music");
 let sound_point = new Audio("../sound-effects/point.mp3");
 let sound_die = new Audio("../sound-effects/die.mp3");
+let bg_music = new Audio(`../sound-effects/${bg_music_name}.mp3`);
 document.querySelector(".background").style.backgroundImage =
   'url("../images/' + window.localStorage.getItem("background-img") + '")';
 
@@ -38,6 +40,11 @@ document.addEventListener("keydown", (e) => {
 });
 
 function play() {
+  bg_music.play();
+  let bg_music_timeinterval_id = setInterval(() => {
+    bg_music.play();
+  }, bg_music.duration * 1000);
+
   function move() {
     if (game_state != "Play") return;
 
@@ -57,20 +64,22 @@ function play() {
         ) {
           game_state = "End";
 
+          let max_score_value = window.localStorage.getItem("max-score");
+          if (Number(max_score_value) == NaN) max_score_value = Number(0);
           let max_score = Math.max(
             Number(score_val.textContent),
-            Number(window.localStorage.getItem("max-score"))
+            Number(max_score_value)
           );
           window.localStorage.setItem("max-score", max_score);
-          console.log(score_val.textContent);
-          console.log(max_score);
 
           message.innerHTML = ` <p>Game Over</p>
                                 <p>Score : ${score_val.textContent}</p>
-                                <p>My Highest Score : ${max_score}</p>
+                                <p>Highest Score : ${max_score}</p>
                                 <p>Press Space to Restart</p>`;
           message.classList.add("messageStyle");
           img.style.display = "none";
+          bg_music.pause();
+          clearInterval(bg_music_timeinterval_id);
           sound_die.play();
           return;
         } else {
