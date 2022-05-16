@@ -44,6 +44,7 @@ function play() {
   let bg_music_timeinterval_id = setInterval(() => {
     bg_music.play();
   }, bg_music.duration * 1000);
+  let starting_time = new Date();
 
   function move() {
     if (game_state != "Play") return;
@@ -64,6 +65,16 @@ function play() {
         ) {
           game_state = "End";
 
+          let ending_time = new Date();
+          let time_diff = ending_time - starting_time;
+          time_diff = time_diff / 1000; // convert to seconds
+          let time_duration = "";
+          if (Math.floor(time_diff / 60) < 10) time_duration += "0";
+          time_duration += Math.floor(time_diff / 60);
+          time_duration += " : ";
+          if (Math.floor(time_diff) % 60 < 10) time_duration += "0";
+          time_duration += Math.floor(time_diff) % 60;
+
           let max_score_value = window.localStorage.getItem("max-score");
           if (Number(max_score_value) == NaN) max_score_value = Number(0);
           let max_score = Math.max(
@@ -74,6 +85,7 @@ function play() {
 
           message.innerHTML = ` <p>Game Over</p>
                                 <p>Score : ${score_val.textContent}</p>
+                                <p>Total Time : ${time_duration} minutes</p>
                                 <p>Highest Score : ${max_score}</p>
                                 <p>Press Space to Restart</p>`;
           message.classList.add("messageStyle");
